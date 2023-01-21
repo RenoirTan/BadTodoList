@@ -1,3 +1,4 @@
+import e from "express";
 import express from "express";
 import knex from "knex";
 
@@ -29,11 +30,27 @@ await client.schema.createTableIfNotExists("Todos", table => {
 
 
 app.get("/", async (req, res) => {
-  console.log("GET /");
   const result = await client
     .select("id", "title")
     .from("Todos");
   res.render("index", {todoItems: result});
+});
+
+app.get("/item/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await client
+    .select("*")
+    .from("Todos")
+    .where("id", id);
+  if (result.length == 0) {
+    res.status(404).render("404");
+  } else {
+    res.render("item", {item: result[0]});
+  }
+});
+
+app.all("*", (req, res) => {
+  res.status(404).render("404");
 });
 
 app.listen(3000);

@@ -5,4 +5,5 @@ block content
   div#todolist
     ul
       each item in todoItems
-        li= item.title
+        li
+          a(href="/item/" + item.id)= item.title
