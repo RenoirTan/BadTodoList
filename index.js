@@ -9,7 +9,8 @@ const client = knex({
   client: "sqlite3",
   connection: {
     filename: "db/todos.db"
-  }
+  },
+  useNullAsDefault: true
 });
 
 
@@ -23,7 +24,7 @@ const client = knex({
 await client.schema.createTableIfNotExists("Todos", table => {
   table.increments("id", {primaryKey: true});
   table.string("title", 64); // Set max length to 64
-  table.string("body")
+  table.text("body")
 });
 
 
