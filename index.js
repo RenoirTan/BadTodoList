@@ -1,10 +1,13 @@
-import e from "express";
+import bodyParser from "body-parser";
 import express from "express";
 import knex from "knex";
 
 
 const app = express();
 app.set("view engine", "pug");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
 
 const client = knex({
   client: "sqlite3",
@@ -46,6 +49,21 @@ app.get("/item/:id", async (req, res) => {
     res.status(404).render("404");
   } else {
     res.render("item", {item: result[0]});
+  }
+});
+
+app.get("/new", async (req, res) => {
+  res.render("new");
+});
+
+app.post("/new", async (req, res) => {
+  const title = req.body.title;
+  const body = req.body.body;
+  const result = await client("Todos").insert({title: title, body: body});
+  if (result.length == 0) {
+    res.status(500).render("500", {errMsg: "Couldn't add item!"});
+  } else {
+    res.redirect(`/item/${result[0]}`);
   }
 });
 

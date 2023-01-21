@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+  h2 Add a new item
+  form(action="/new" method="POST")
+    div.form-elem
+      h3 Title (Max 64 characters)
+      input(type="text" name="title" placeholder="Insert a title")
+    div.form-elem
+      h3 Content
+      input(type="text" name="body" placeholder="Add details of what you want to do")
+    div.form-elem
+      input(type="submit", value="Submit")
+  a(href="/") Go back
