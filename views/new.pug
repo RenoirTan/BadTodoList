@@ -1,14 +1,27 @@
 extends layout.pug
 
 block content
-  h2 Add a new item
+  h1 Add a new item
   form(action="/new" method="POST")
     div.form-elem
       h3 Title (Max 64 characters)
-      input(type="text" name="title" placeholder="Insert a title" required maxlength="64")
+      textarea.form-text(
+        type="text"
+        name="title"
+        placeholder="Insert a title"
+        required
+        maxlength="64"
+        rows=1
+      )
     div.form-elem
       h3 Content
-      input(type="text" name="body" placeholder="Add details of what you want to do")
+      textarea.form-text(
+        type="text"
+        name="body"
+        placeholder="Add details of what you want to do"
+        rows=10
+      )
     div.form-elem
-      input(type="submit", value="Submit")
-  a(href="/") Go back
+      input.button(type="submit", value="Submit")
+  div
+    a.button(href="/") Go back

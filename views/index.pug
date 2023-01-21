@@ -3,8 +3,8 @@ extends layout.pug
 block content
   h1 Todo List
   div#todolist
-    ul
-      each item in todoItems
-        li
-          a(href="/item/" + item.id)= item.title
-  a(href="/new") Add a new item
+    each item in todoItems
+      div.list-item
+        a(href="/item/" + item.id)= item.title
+  div
+    a.button(href="/new") Add a new item
