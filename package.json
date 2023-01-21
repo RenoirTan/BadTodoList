@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/RenoirTan/BadGryphonShop/issues"
   },
-  "homepage": "https://github.com/RenoirTan/BadGryphonShop#readme"
+  "homepage": "https://github.com/RenoirTan/BadGryphonShop#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
