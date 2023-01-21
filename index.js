@@ -3,6 +3,8 @@ import knex from "knex";
 
 
 const app = express();
+app.set("view engine", "pug");
+
 const client = knex({
   client: "sqlite3",
   connection: {
@@ -30,7 +32,7 @@ app.get("/", async (req, res) => {
   const result = await client
     .select("*")
     .from("Todos");
-  res.json({stuff: result});
+  res.render("index", {todoItems: result});
 });
 
 app.listen(3000);
