@@ -1,0 +1,19 @@
+{
+  "name": "badgryphonshop",
+  "version": "0.1.0",
+  "description": "A terrible version of RI's Gryphon shop.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RenoirTan/BadGryphonShop.git"
+  },
+  "author": "RenoirTan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RenoirTan/BadGryphonShop/issues"
+  },
+  "homepage": "https://github.com/RenoirTan/BadGryphonShop#readme"
+}
