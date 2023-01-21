@@ -18,18 +18,14 @@ const client = knex({
 });
 
 
-/**
- * CREATE TABLE Todos IF NOT EXIST (
- *     id INTEGER AUTOINCREMENT PRIMARY KEY,
- *     title varchar(64),
- *     body TEXT
- * );
- */
-await client.schema.createTableIfNotExists("Todos", table => {
-  table.increments("id", {primaryKey: true});
-  table.string("title", 64); // Set max length to 64
-  table.text("body")
-});
+let todosExist = await client.schema.hasTable("Todos");
+if (!todosExist) {
+  await client.schema.createTable("Todos", table => {
+    table.increments("id", {primaryKey: true}).unique().notNullable();
+    table.string("title", 64); // Set max length to 64
+    table.text("body")
+  });
+}
 
 
 app.get("/", async (req, res) => {
@@ -49,6 +45,16 @@ app.get("/item/:id", async (req, res) => {
     res.status(404).render("404");
   } else {
     res.render("item", {item: result[0]});
+  }
+});
+
+app.post("/item/delete/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await client("Todos").delete().where("id", id);
+  if (result == 1) {
+    res.redirect("/");
+  } else {
+    res.status(404).render("404");
   }
 });
 

@@ -4,3 +4,5 @@ block content
   h2= item.title
   p= item.body
   a(href="/") Return to main page
+  form(action="/item/delete/" + item.id method="POST")
+    input(type="submit", value="Delete")
