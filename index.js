@@ -31,7 +31,7 @@ await client.schema.createTableIfNotExists("Todos", table => {
 app.get("/", async (req, res) => {
   console.log("GET /");
   const result = await client
-    .select("*")
+    .select("id", "title")
     .from("Todos");
   res.render("index", {todoItems: result});
 });
