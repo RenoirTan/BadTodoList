@@ -69,6 +69,9 @@ app.get("/new", async (req, res) => {
 app.post("/new", async (req, res) => {
   const title = req.body.title;
   const body = req.body.body;
+  if (title.length == 0 || title.length > 64) {
+    res.status(400).render("400", {errMsg: "Title must be between 1 and 64 characters."});
+  }
   const result = await client(TODOS).insert({title: title, body: body});
   if (result.length == 0) {
     res.status(500).render("500", {errMsg: "Couldn't add item!"});
