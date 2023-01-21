@@ -1,11 +1,8 @@
-doctype html
-html(lang='en')
-  head
-    title Todo List
-  body
-    div#main
-      h1 Todo List
-      div#todolist
-        ul
-          each item in todoItems
-            li= item.title
+extends layout.pug
+
+block content
+  h1 Todo List
+  div#todolist
+    ul
+      each item in todoItems
+        li= item.title
